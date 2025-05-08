@@ -1,8 +1,8 @@
 
 import './App.css';
-import Header from './component/Header.js';
-import TodoEditor from './component/TodoEditor.js';
-import TodoList from './component/TodoList.js';
+import Header from './component/Header';
+import TodoEditor from './component/TodoEditor';
+import TodoList from './component/TodoList';
 import {useState ,useRef} from 'react';
 
 const mockTodo = [
@@ -11,19 +11,19 @@ const mockTodo = [
     isDone:false,
     content: "react 공부하기",
     createDate: new Date().getTime(),
-},
-{
+  },
+  {
     id:1,
     isDone:false,
     content: "빨래 널기",
     createDate: new Date().getTime(),
-},
-{
+  },
+  {
     id:2,
     isDone:false,
     content: "밥 먹기",
     createDate: new Date().getTime(),
-},
+  },
 ]
 function App(){
   const idRef = useRef(3);

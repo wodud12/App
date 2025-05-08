@@ -1,52 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-function PostList(){
-  const [posts , setPosts] = useState([]); // 받아온 데이터를 저장
-  const [loading , setLoading] = useState(true); // 로딩 중 인지 표시
-
-
-  useEffect(()=>{
-    //화면이 처음 뜰 때 실행하는 부분
-    //1. promise 2. awit 3. Async<< 숙제 사전조사
-
-    fetch ('https://jsonplaceholder.typicode.com/posts')
-    .then((res)=>res.json()) //응답을 json 형식으로 변경
-    .then((data)=>{
-      setPosts(data); // 받아온 글 목록을 상태에 저장
-      setLoading(false); //로딩 끝
-    })
-  },[])
-  return(
-    <div>
-      <h2>게시물 목록</h2>
-      {
-        loading ? (
-          <p>불러오는중.....</p>
-        ) : (
-          <ul>
-            {/* slice , map */}
-            {posts.slice(0,6).map((post)=>{
-              <li key={post.id}>
-                <strong>{post.tite}</strong>
-                <p>{post.body}</p>
-              </li>
-            })}
-          {/* {posts.slice(0,5).map((post)=>{
-              <li key={post.id}>
-                <strong>{post.title}</strong>
-                <p>{post.body}</p>
-              </li>
-            })} */}
-         </ul>
-        )
-      }
-    </div>
+function SearchBox() {
+  const [keyword, setKeyword] = useState('');
   
-  )
+  const items = ['사과수아', '바나나영원', '포도아영', '오렌지재영', '수박은빈'];
+
+  // 검색어에 따라 필터링
+  const filteredItems = items.filter((item) =>
+    item.includes(keyword)
+  );
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h2> 과일 검색</h2>
+      
+      <input
+        type="text"
+        placeholder="검색어를 입력하세요"
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+        style={{ padding: '8px', width: '200px' }}
+      />
+
+      <ul style={{ marginTop: '20px' }}>
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item, index) => <li key={index}>{item}</li>)
+        ) : (
+          <li>검색 결과가 없습니다.</li>
+        )}
+      </ul>
+    </div>
+  );
 }
 
+export default SearchBox;
 
-export default PostList;
 
 
 
