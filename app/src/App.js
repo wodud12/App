@@ -1,41 +1,32 @@
 import { useState } from 'react';
 
-function SearchBox() {
-  const [keyword, setKeyword] = useState('');
+function SimpletTodoItem(){
+  const [isDone , setIsDone] = useState(false);
   
-  const items = ['사과수아', '바나나영원', '포도아영', '오렌지재영', '수박은빈'];
+  const handleCheckboxChange=()=>{
+    setIsDone(!isDone)
+    // 체크할 때 마다 true / false 반전
+  }
 
-  // 검색어에 따라 필터링
-  const filteredItems = items.filter((item) =>
-    item.includes(keyword)
-  );
-
-  return (
-    <div style={{ padding: '20px' }}>
-      <h2> 과일 검색</h2>
-      
-      <input
-        type="text"
-        placeholder="검색어를 입력하세요"
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        style={{ padding: '8px', width: '200px' }}
-      />
-
-      <ul style={{ marginTop: '20px' }}>
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item, index) => <li key={index}>{item}</li>)
-        ) : (
-          <li>검색 결과가 없습니다.</li>
-        )}
-      </ul>
+  return(
+    <div
+      style={{
+        border: '1px solid gray',
+        padding: '10px',
+        margin: '10px',
+        textDecoration: isDone ? 'line-through' : 'none',
+      }}
+    >
+      <input type='checkbox'
+      onChange={handleCheckboxChange}
+      checked={isDone}/>
+      <span>공부하기</span>
     </div>
-  );
+  )
+
 }
 
-export default SearchBox;
-
-
+export default SimpletTodoItem;
 
 
 
