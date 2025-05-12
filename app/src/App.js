@@ -1,32 +1,31 @@
-import { useState } from 'react';
+import {BrowserRouter, Routes , Route} from 'react-router-dom';
+import Header from "./components/Header";
 
-function SimpletTodoItem(){
-  const [isDone , setIsDone] = useState(false);
-  
-  const handleCheckboxChange=()=>{
-    setIsDone(!isDone)
-    // 체크할 때 마다 true / false 반전
-  }
+import Footer from "./components/Footer";
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Cart from './pages/Cart';
+import Contact from './pages/Contact';
 
+
+function App(){
   return(
-    <div
-      style={{
-        border: '1px solid gray',
-        padding: '10px',
-        margin: '10px',
-        textDecoration: isDone ? 'line-through' : 'none',
-      }}
-    >
-      <input type='checkbox'
-      onChange={handleCheckboxChange}
-      checked={isDone}/>
-      <span>공부하기</span>
-    </div>
+    <BrowserRouter>
+    <Header/>
+    <Navbar/>
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Products" element={<Products />} />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Contact" element={<Contact />} />
+    </Routes>
+
+
+    <Footer/>
+    </BrowserRouter>
   )
-
 }
-
-export default SimpletTodoItem;
+export default App;
 
 
 

@@ -2,7 +2,10 @@ import "./App.css";
 import Header from "./component/Header";
 import TodoEditor from "./component/TodoEditor";
 import TodoList from "./component/TodoList";
-import { useState ,useRef } from 'react';
+import { useReducer ,useRef } from 'react';
+
+import TestComp from "./component/TestComp";
+
 
 const mockTodo = [
   {
@@ -25,25 +28,35 @@ const mockTodo = [
   },
 ];
 
+function reducer(state, action) {
+  //상태 변화 코드
+  return state;
+}
+
 function App(){
+  const [todo,dispatch] = useReducer(reducer, mockTodo);
   const idRef = useRef(3);
-  const [todo,setTodo] = useState(mockTodo);
-  const onCreate = (content) =>{
-    let newItem = {
-      id: idRef.current,
-      content,
-      isDone:false,
-      createDate: new Date().getTime(),
-    }
-    setTodo([newItem, ...todo]);
+
+  const onCreate = (content) => {
+    dispatch({
+      type: "CREATE",
+      newItem: {
+        id: idRef.current,
+        content,
+        isDone: false,
+        createdDate: new Date().getTime(),
+      },
+    });
     idRef.current += 1;
-  }
-  const onDelete = (targetId) => {
-    setTodo(todo.filter((it) => it.id !== targetId));
+  };
+  const onUpdate = (targetId) => {
+  };
+  const onDelete = (content) => {
   };
   // todo 저장하는 공간 
   return(
     <div className="App">   
+        <TestComp /> 
         <Header />
         <TodoEditor onCreate={onCreate}/>
         <TodoList todo={todo} onDelete={onDelete} />
