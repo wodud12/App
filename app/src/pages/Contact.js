@@ -1,11 +1,12 @@
 
+
+
 function Contact(){
     return(
         <div>
-            <h2>Welcome to MyShop!</h2>
-            <p>Best products, Good !!</p>
+          <h2>Contact</h2>
         </div>
     )
-}
 
+}
 export default Contact;

@@ -1,12 +1,15 @@
 import {Link} from 'react-router-dom';
+import '../styles/navbar.css';
 
 function Navbar(){
+
     return(
         <nav>
-            <Link to='/' style={{marginRight: '10px'}}> Home </Link>
-            <Link to='/Products' style={{marginRight: '10px'}}> Products </Link>
-            <Link to='/Cart' style={{marginRight: '10px'}}> Cart </Link>
-            <Link to='/Contact' style={{marginRight: '10px'}}> Contact </Link>
+            <ul>
+                <li><Link to="/">HOME</Link></li>
+                <li><Link to="/About">ABOUT</Link></li>
+                <li><Link to="/Contact">CONTACT</Link></li>
+            </ul>
         </nav>
     )
 }

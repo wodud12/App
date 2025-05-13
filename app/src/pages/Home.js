@@ -1,11 +1,11 @@
 
+
 function Home(){
     return(
         <div>
-            <h2>Welcome to MyShop!</h2>
-            <p>Best products, Good !!</p>
+          <h2>HOME</h2>
         </div>
     )
-}
 
+}
 export default Home;
