@@ -11,7 +11,6 @@ function TestComp(){
     };
         return(
             <div>
-                <h4>테스트 컴포넌트</h4>
                 <div>
                     <bold>{count}</bold>
                 </div>

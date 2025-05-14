@@ -5,6 +5,8 @@ interface WelcomeMessageProps{
     // age: number;
     // text: string;
     // date: number;
+
+    
 }
 
 const WelcomeMessage:React.FC<WelcomeMessageProps> = ({name}) => {

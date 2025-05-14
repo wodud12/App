@@ -1,14 +1,16 @@
+import React from "react";
+import { Routes,Route } from "react-router-dom";
+import Home from './page/Home';
+import About from "./page/About";
 
-import React from 'react';
-import WelcomeMessage from './component/message';
+const App: React.FC=() =>{
 
-const App: React.FC = () => {
   return(
-    <div>
-      <WelcomeMessage name="현수" />
-      <WelcomeMessage name="아용" />
-      <WelcomeMessage name="지혜" />
-    </div>
+
+    <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route path="/About" element={<About/>} />
+    </Routes>
   )
 }
 

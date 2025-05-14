@@ -1,67 +1,41 @@
-import "./App.css";
-import Header from "./component/Header";
-import TodoEditor from "./component/TodoEditor";
-import TodoList from "./component/TodoList";
-import { useReducer ,useRef } from 'react';
+import { useState } from 'react';
 
-import TestComp from "./component/TestComp";
+function App() {
+  const [todo, setTodo] = useState([
+    { id: 1, text: '공부하기', isDone: false },
+    { id: 2, text: '운동하기', isDone: true },
+    { id: 3, text: '청소하기', isDone: false }
+  ]);
 
-
-const mockTodo = [
-  {
-    id: 0,
-    isDone: false,
-    content: "React 공부하기",
-    createdDate: new Date().getTime(),
-  },
-  {
-    id: 1,
-    isDone: false,
-    content: "빨래 널기",
-    createdDate: new Date().getTime(),
-  },
-  {
-    id: 2,
-    isDone: false,
-    content: "노래 연습하기",
-    createdDate: new Date().getTime(),
-  },
-];
-
-function reducer(state, action) {
-  //상태 변화 코드
-  return state;
-}
-
-function App(){
-  const [todo,dispatch] = useReducer(reducer, mockTodo);
-  const idRef = useRef(3);
-
-  const onCreate = (content) => {
-    dispatch({
-      type: "CREATE",
-      newItem: {
-        id: idRef.current,
-        content,
-        isDone: false,
-        createdDate: new Date().getTime(),
-      },
-    });
-    idRef.current += 1;
-  };
   const onUpdate = (targetId) => {
+    setTodo(
+      todo.map((it) =>
+        it.id === targetId ? { ...it, isDone: !it.isDone } : it
+      )
+    );
   };
-  const onDelete = (content) => {
-  };
-  // todo 저장하는 공간 
-  return(
-    <div className="App">   
-        <TestComp /> 
-        <Header />
-        <TodoEditor onCreate={onCreate}/>
-        <TodoList todo={todo} onDelete={onDelete} />
+
+
+  return (
+    <div>
+      <h2>📝 할 일 목록</h2>
+      <ul>
+        {todo.map((it) => (
+          <li key={it.id} style={{ marginBottom: 10 , listStyle:'none'}}>
+            <input type="checkbox"
+            checked={it.isDone}
+            onChange={()=>onUpdate(it.id)} />
+            <button onClick={() => onUpdate(it.id)}>
+              {it.isDone ? ' 되돌리기' : ' 완료'}
+            </button>
+            <span style={{TextDecoration: it.isDone ? 'line-through' : 'none'}}>
+              {it.isDone}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
 export default App;

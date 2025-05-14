@@ -11,7 +11,7 @@ const TodoItem = ({ id, content, isDone, createdDate, onUpdate, onDelete }) => {
         <div className="TodoItem">
             <div className="checkbox_col">
                 <input
-                    onChange={onChangeCheckbox}
+                    onChange={onChangeCheckBox}
                     checked={isDone}
                     type="checkbox" />
             </div>
