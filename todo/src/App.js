@@ -1,41 +1,63 @@
-import { useState } from 'react';
 
-function App() {
-  const [todo, setTodo] = useState([
-    { id: 1, text: '공부하기', isDone: false },
-    { id: 2, text: '운동하기', isDone: true },
-    { id: 3, text: '청소하기', isDone: false }
-  ]);
+import "./App.css";
+import Header from "./component/Header";
+import TodoEditor from "./component/TodoEditor";
+import TodoList from "./component/TodoList";
+import { useState ,useRef } from 'react';
 
+
+import TestComp from "./component/TestComp";
+
+
+const mockTodo = [
+  {
+    id: 0,
+    isDone: false,
+    content: "React 공부하기",
+    createdDate: new Date().getTime(),
+  },
+  {
+    id: 1,
+    isDone: false,
+    content: "빨래 널기",
+    createdDate: new Date().getTime(),
+  },
+  {
+    id: 2,
+    isDone: false,
+    content: "노래 연습하기",
+    createdDate: new Date().getTime(),
+  },
+];
+
+function App(){
+  const idRef = useRef(3);
+  const [todo,setTodo] = useState(mockTodo);
+  const onCreate = (content) =>{
+    let newItem = {
+      id: idRef.current,
+      content,
+      isDone:false,
+      createDate: new Date().getTime(),
+    }
+    setTodo([newItem, ...todo]);
+    idRef.current += 1;
+  }
   const onUpdate = (targetId) => {
-    setTodo(
-      todo.map((it) =>
-        it.id === targetId ? { ...it, isDone: !it.isDone } : it
-      )
-    );
+    setTodo(todo.filter((it) => it.id !== targetId));
   };
-
-
-  return (
-    <div>
-      <h2>📝 할 일 목록</h2>
-      <ul>
-        {todo.map((it) => (
-          <li key={it.id} style={{ marginBottom: 10 , listStyle:'none'}}>
-            <input type="checkbox"
-            checked={it.isDone}
-            onChange={()=>onUpdate(it.id)} />
-            <button onClick={() => onUpdate(it.id)}>
-              {it.isDone ? ' 되돌리기' : ' 완료'}
-            </button>
-            <span style={{TextDecoration: it.isDone ? 'line-through' : 'none'}}>
-              {it.isDone}
-            </span>
-          </li>
-        ))}
-      </ul>
+  const onDelete = (targetId) => {
+    setTodo(todo.filter((it) => it.id !== targetId));
+  };
+  // todo 저장하는 공간 
+  return(
+    <div className="App">
+        <TestComp />   
+        <Header />
+        <TodoEditor onCreate={onCreate}/>
+        <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete}/>
     </div>
-  );
+  )
 }
 
 export default App;
