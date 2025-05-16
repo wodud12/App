@@ -3,10 +3,8 @@ import "./App.css";
 import Header from "./component/Header";
 import TodoEditor from "./component/TodoEditor";
 import TodoList from "./component/TodoList";
-import { useState ,useRef } from 'react';
+import React, {useCallback, useReducer, useState ,useRef } from 'react';
 
-
-import TestComp from "./component/TestComp";
 
 
 const mockTodo = [
@@ -29,6 +27,7 @@ const mockTodo = [
     createdDate: new Date().getTime(),
   },
 ];
+const TodoContext = React.createContext();
 
 function App(){
   const idRef = useRef(3);
@@ -52,10 +51,11 @@ function App(){
   // todo 저장하는 공간 
   return(
     <div className="App">
-        <TestComp />   
         <Header />
-        <TodoEditor onCreate={onCreate}/>
-        <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete}/>
+        <TodoContext.Provider value={{todo, onCreate, onUpdate, onDelete}}> 
+          <TodoEditor onCreate={onCreate}/>
+          <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete}/>
+        </TodoContext.Provider>
     </div>
   )
 }

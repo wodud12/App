@@ -1,25 +1,29 @@
-import { BrowserRouter, Routes , Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import './styles/global.css';
+import Header from "./Header";
+import Page from "./Page";
+import { useState } from "react";
+import AuthContext from "./AuthContext";
 
-function App(){
+function  App(){
+  const [user,setUser] = useState(null);
+  //로그인 되어 있는 상태를 저장
+
+  const login = () =>{
+    setUser({
+      name: '홍길동',
+      email: 'jywodud12@gmail.com'
+    })
+  }
+  const logout = () =>{
+    setUser(null)
+  }
   return(
-      <BrowserRouter>
-        <Navbar/>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/About" element={<About/>} />
-          <Route path="/Contact" element={<Contact/>} />
-        </Routes>
-      </BrowserRouter>
+    <AuthContext.Provider value={{user,login,logout}}>
+      <Header />
+      <Page />
+    </AuthContext.Provider>
   )
 }
-
 export default App;
-
 
 
 
