@@ -1,18 +1,14 @@
 import React from 'react';
 import './App.css';
-import Item from './components/item';
-import Box from './components/box';
-import SingBoxList from './components/SingBoxList';
-
+import Navbar from './components/Navber';
+import './components/navbar.scss';
 
 function App() {
 
   return (
     <div className="App">
-      <h2>Slick Slider</h2>
-      <Item/>
-      <SingBoxList />
-      <Box/>
+      <Navbar />
+
     </div>
   );
 }
